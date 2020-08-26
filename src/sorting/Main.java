@@ -5,28 +5,36 @@ import java.util.*;
 public class Main {
 
     private static String sortingType = "natural";
+    private static String dataType = "integer";
 
     public static void main(final String[] args) {
         if (args.length > 0) {
-            Boolean flag = false;
-            for (String s : args) {
-                if ("-sortIntegers".equals(s))
+            for (int i = 0; i < args.length; i++) {
+                String s = args[i];
+                if ("-sortingType".equals(s) && !args[i + 1].isEmpty())
                 {
-                    flag = true;
-                    break;
+                    if ("byCount".equals(args[i + 1])) {
+                        sortingType = "byCount";
+                    }
+                }
+                if ("-dataType".equals(s) && !args[i + 1].isEmpty())
+                {
+                    if ("long".equals(args[i + 1]))
+                        dataType = "long";
+                    else if ("word".equals(args[i + 1]))
+                        dataType = "word";
+                    else if ("line".equals(args[i + 1]))
+                        dataType = "line";
                 }
             }
-            if (flag) {
-                inputInteger();
-            }
-            else if ("-dataType".equals(args[0])) {
-                if ("long".equals(args[1]))
+            if ("long".equals(dataType))
                     inputLong();
-                else if ("line".equals(args[1]))
+                else if ("line".equals(dataType))
                     inputLine();
-                else if ("word".equals(args[1]))
+                else if ("word".equals(dataType))
                     inputWord();
-            }
+                else
+                    inputInteger();
         }
     }
 
